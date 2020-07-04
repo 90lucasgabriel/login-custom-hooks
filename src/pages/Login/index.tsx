@@ -1,15 +1,19 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useContext } from 'react';
 import { FiLogIn } from 'react-icons/fi';
 
 import { Container, Content } from './styles';
+import AuthContext from '../../context/AuthContext';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState('admin');
   const [password, setPassword] = useState('admin');
 
+  const { name } = useContext(AuthContext);
+
   const handleSubmit = useCallback(
     e => {
       e.preventDefault();
+      console.log('AuthContext: name', name);
 
       if (username === 'admin' && password === 'admin') {
         console.log('login true');
