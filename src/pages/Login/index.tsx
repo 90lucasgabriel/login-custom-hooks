@@ -2,28 +2,21 @@ import React, { useCallback, useState, useContext } from 'react';
 import { FiLogIn } from 'react-icons/fi';
 
 import { Container, Content } from './styles';
-import AuthContext from '../../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
 
 const Login: React.FC = () => {
-  const [username, setUsername] = useState('admin');
+  const [email, setEmail] = useState('admin@example.com');
   const [password, setPassword] = useState('admin');
 
-  const { name } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
 
   const handleSubmit = useCallback(
     e => {
       e.preventDefault();
-      console.log('AuthContext: name', name);
-
-      if (username === 'admin' && password === 'admin') {
-        console.log('login true');
-        return true;
-      }
-
-      console.log('login false');
-      return false;
+      const response = login({ email, password });
+      console.log('response', response);
     },
-    [username, password],
+    [login, email, password],
   );
 
   return (
@@ -33,10 +26,10 @@ const Login: React.FC = () => {
           <h1>Login</h1>
 
           <input
-            type="text"
-            placeholder="Usuário"
-            value={username}
-            onChange={e => setUsername(e.target.value)}
+            type="email"
+            placeholder="E-mail"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
           />
           <input
             type="password"
@@ -48,11 +41,6 @@ const Login: React.FC = () => {
             Entrar
           </button>
         </form>
-
-        <a href="">
-          <FiLogIn />
-          Criar conta
-        </a>
       </Content>
     </Container>
   );
