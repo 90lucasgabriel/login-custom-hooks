@@ -5,37 +5,20 @@ interface LoginCredentials {
   password: string;
 }
 
-interface LoginResponse {
-  success: boolean;
-  name?: string;
-  avatarUrl?: string;
-}
-
 interface AuthContextData {
   name: string;
-  login(loginCredentials: LoginCredentials): LoginResponse;
+  login(loginCredentials: LoginCredentials): boolean;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const AuthProvider: React.FC = ({ children }) => {
-  const login = useCallback(({ email, password }): LoginResponse => {
-    let response: LoginResponse;
-
+  const login = useCallback(({ email, password }): boolean => {
     if (email === 'admin@example.com' && password === 'admin') {
-      response = {
-        success: true,
-        name: 'User Full Name',
-        avatarUrl:
-          'https://gravatar.com/avatar/f5938e040ad9f0b8f2748b439e13495a',
-      };
-
-      return response;
+      return true;
     }
 
-    response = { success: false };
-
-    return response;
+    return false;
   }, []);
 
   return (
