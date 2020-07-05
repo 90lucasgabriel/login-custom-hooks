@@ -1,15 +1,15 @@
 import React from 'react';
 
 import GlobalStyle from './styles/global';
+import AppProvider from './hooks';
 import Login from './pages/Login';
-import { AuthProvider } from './hooks/auth';
 
 const App: React.FC = () => {
   return (
     <>
-      <AuthProvider>
+      <AppProvider>
         <Login />
-      </AuthProvider>
+      </AppProvider>
 
       <GlobalStyle />
     </>
