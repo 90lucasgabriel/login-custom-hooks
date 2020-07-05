@@ -8,13 +8,13 @@ const Login: React.FC = () => {
   const [email, setEmail] = useState('admin@example.com');
   const [password, setPassword] = useState('admin');
 
-  const { login } = useContext(AuthContext);
+  const { user, login } = useContext(AuthContext);
 
   const handleSubmit = useCallback(
     e => {
       e.preventDefault();
-      const response = login({ email, password });
-      console.log('response', response);
+      login({ email, password });
+      console.log('user', user);
     },
     [login, email, password],
   );
