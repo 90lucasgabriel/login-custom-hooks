@@ -2,13 +2,13 @@ import React, { useCallback, useState, useContext } from 'react';
 import { FiLogIn } from 'react-icons/fi';
 
 import { Container, Content } from './styles';
-import { AuthContext } from '../../context/AuthContext';
+import { useAuth } from '../../hooks/auth';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('admin@example.com');
   const [password, setPassword] = useState('admin');
 
-  const { user, login } = useContext(AuthContext);
+  const { user, login } = useAuth();
 
   const handleSubmit = useCallback(
     e => {
